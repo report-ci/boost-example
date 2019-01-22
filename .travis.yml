@@ -1,0 +1,22 @@
+language: cpp
+compiler:
+  - gcc
+
+os:
+  - linux
+
+addons:
+  apt:
+    packages:
+      - libboost-test-dev
+      - cmake
+
+script:
+  - mkdir build &&  cd build
+  - cmake ..
+  - cmake --build . -- -j4
+  - cd test
+  - ctest . -C Debug -V
+
+after_script:
+  - python <(curl -s https://raw.githubusercontent.com/report-ci/scripts/master/upload.py)

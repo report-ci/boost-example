@@ -1,0 +1,21 @@
+os: Visual Studio 2015
+configuration: Debug
+platform: x64
+
+environment:
+  BOOST_LIBRARYDIR: "C:\\Libraries\\boost_1_67_0\\lib64-msvc-14.0"
+  PATH: "%BOOST_LIBRARYDIR%;%PATH%"
+
+build_script:
+  - mkdir build && cd build
+  - cmake .. -DBOOST_ROOT=C:\\Libraries\\boost_1_67_0
+  - cmake --build .
+
+after_build:
+before_build:
+test_script:
+  - cd test
+  - ctest . -C Debug -V
+
+after_test:
+  - curl -s https://raw.githubusercontent.com/report-ci/scripts/master/upload.py | python

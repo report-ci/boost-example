@@ -1,0 +1,39 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: "buildpack-deps:bionic"
+    steps:
+      - checkout
+      - run:
+          name: Installing SUDO
+          command: 'apt-get update && apt-get install -y sudo && rm -rf /var/lib/apt/lists/*'
+      - run:
+          name: Installing GCC
+          command: 'apt-get update && apt-get install -y gcc g++'
+      - run:
+          name: Install CMAKE
+          command: 'apt-get update && sudo apt-get install -y cmake'
+      - run:
+          name: Install Boost test
+          command: 'apt-get update && sudo apt-get install -y libboost-test-dev'
+      - run:
+          name: CMake
+          command: |
+            mkdir build
+            cd build
+            cmake ..
+            cd ..
+      - run:
+          name: Compiling
+          command: |
+            cd build
+            cmake --build . -- -j4
+            cd ..
+      - run:
+          name: Unit Testing
+          command: |
+            cd build/test
+            ctest . -C Debug -V
+            python <(curl -s https://raw.githubusercontent.com/report-ci/scripts/master/upload.py)
