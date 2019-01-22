@@ -35,5 +35,6 @@ jobs:
           name: Unit Testing
           command: |
             cd build/test
-            ctest . -C Debug -V
+            ctest . -C Debug -V || SUCCESS=$?
             python <(curl -s https://raw.githubusercontent.com/report-ci/scripts/master/upload.py)
+            exit $SUCCESS
