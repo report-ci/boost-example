@@ -1,7 +1,7 @@
 enable_testing()
 
 if (NOT "$ENV{BOOST_LOG_LEVEL}" STREQUAL "")
-    set(BOOST_LOG_LEVEL "$ENV{BOOST_LOG_LEVEL}" CACHE INTERNAL "Copied from environment variable")
+    set(LOG_LEVEL "$ENV{BOOST_LOG_LEVEL}" CACHE INTERNAL "Copied from environment variable")
 else()
     set(LOG_LEVEL all)
 endif()
