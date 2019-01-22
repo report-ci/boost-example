@@ -11,6 +11,16 @@ addons:
       - libboost-test-dev
       - cmake
 
+env:
+  - BOOST_LOG_LEVEL=all BOOST_REPORT_LEVEL=detailed
+  - BOOST_LOG_LEVEL=all BOOST_REPORT_LEVEL=no
+  - BOOST_LOG_LEVEL=test_suite BOOST_REPORT_LEVEL=confirm
+  - BOOST_LOG_LEVEL=message BOOST_REPORT_LEVEL=short
+  - BOOST_LOG_LEVEL=warning BOOST_REPORT_LEVEL=detailed
+  - BOOST_LOG_LEVEL=error BOOST_REPORT_LEVEL=detailed
+  - BOOST_LOG_LEVEL=nothing BOOST_REPORT_LEVEL=detailed
+  - BOOST_LOG_LEVEL=nothing BOOST_REPORT_LEVEL=no
+
 script:
   - mkdir build &&  cd build
   - cmake ..
