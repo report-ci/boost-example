@@ -17,5 +17,5 @@ test_script:
   - cd test
   - ctest . -C Debug -V
 
-after_test:
+on_finish:
   - curl -s https://raw.githubusercontent.com/report-ci/scripts/master/upload.py | python
