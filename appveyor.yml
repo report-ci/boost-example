@@ -9,13 +9,17 @@ environment:
 build_script:
   - mkdir build && cd build
   - cmake .. -DBOOST_ROOT=C:\\Libraries\\boost_1_67_0
-  - cmake --build .
+  - cmake --build . > build.log
 
 after_build:
 before_build:
 test_script:
   - cd test
   - ctest . -C Debug -V
+
+on_failure:
+  - curl -s https://raw.githubusercontent.com/report-ci/scripts/master/upload.py | python - --tool msvc --input build.log
+
 
 on_finish:
   - curl -s https://raw.githubusercontent.com/report-ci/scripts/master/upload.py | python
