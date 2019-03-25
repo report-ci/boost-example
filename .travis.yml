@@ -18,7 +18,7 @@ script:
   - cat build.log
   - cd test
   - ctest . -C Debug -V
-
+  - cd ..
 after_failure:
   - curl -s https://raw.githubusercontent.com/report-ci/scripts/master/annotate.py | python - --tool gcc --input build.log
 
