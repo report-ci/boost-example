@@ -9,7 +9,7 @@ environment:
 build_script:
   - mkdir build && cd build
   - cmake .. -DBOOST_ROOT=C:\\Libraries\\boost_1_67_0
-  - cmake --build . 2> build.log
+  - cmake --build . > build.log
   - type build.log
 
 after_build:

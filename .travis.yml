@@ -20,7 +20,7 @@ script:
   - ctest . -C Debug -V
 
 after_failure:
-  - curl -s https://raw.githubusercontent.com/report-ci/scripts/master/upload.py | python - --tool gcc --input build.log
+  - curl -s https://raw.githubusercontent.com/report-ci/scripts/master/annotate.py | python - --tool gcc --input build.log
 
 after_script:
   - python <(curl -s https://raw.githubusercontent.com/report-ci/scripts/master/upload.py)
