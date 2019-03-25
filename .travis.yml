@@ -14,12 +14,13 @@ addons:
 script:
   - mkdir build &&  cd build
   - cmake ..
-  - cmake --build . -- -j4 > build.log
+  - cmake --build . -- -j4 2> build.log
+  - cat build.log
   - cd test
   - ctest . -C Debug -V
-
+  - cd ..
 after_failure:
-  - curl -s https://raw.githubusercontent.com/report-ci/scripts/master/upload.py | python - --tool gcc --input build.log
+  - curl -s https://raw.githubusercontent.com/report-ci/scripts/master/annotate.py | python - --tool gcc --input build.log
 
 after_script:
   - python <(curl -s https://raw.githubusercontent.com/report-ci/scripts/master/upload.py)
