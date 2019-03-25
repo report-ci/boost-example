@@ -14,7 +14,8 @@ addons:
 script:
   - mkdir build &&  cd build
   - cmake ..
-  - cmake --build . -- -j4 > build.log
+  - cmake --build . -- -j4 2> build.log
+  - cat build.log
   - cd test
   - ctest . -C Debug -V
 
